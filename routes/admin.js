@@ -46,7 +46,7 @@ router.post("/add-product", (req, res) => {
   // console.log(req.body);
   // console.log(req.files.Image);
   productHelpers.addProduct(req.body, (id) => {
-    res.render("admin/add-product");
+    // to store the image to a seperate folder with the name as id of inserted document
     let image = req.files.Image;
     image.mv("./public/product-images/" + id + ".jpg", (err, done) => {
       if (!err) {
