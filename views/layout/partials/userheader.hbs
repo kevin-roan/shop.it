@@ -46,18 +46,21 @@
           <a class="nav-link" href="#">Orders</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input
-          class="form-control mr-sm-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
+      <div class="btn-group">
+        <button type="button" class="btn btn-warning">Account</button>
         <button
-          class="btn btn-outline-success my-2 my-sm-0"
-          type="submit"
-        >Search</button>
-      </form>
+          type="button"
+          class="btn btn-warning dropdown-toggle dropdown-toggle-split"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/login">Login</a>
+        </div>
+      </div>
     </div>
   </nav>
 </header>
