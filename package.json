@@ -13,6 +13,7 @@
     "express-fileupload": "^1.4.0",
     "express-formidable": "^1.2.0",
     "express-handlebars": "^6.0.7",
+    "express-session": "^1.17.3",
     "fileupload": "^0.2.1",
     "formidable": "^2.1.1",
     "hbs": "^4.2.0",
