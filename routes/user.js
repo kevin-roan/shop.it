@@ -13,6 +13,12 @@ router.get("/", function (req, res, next) {
   });
 });
 router.get("/login", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+  } else {
+    res.render("user/login", { LoginErr: req.session.loginErr });
+    req.session.loginErr = false;
+  }
   res.render("user/login");
 });
 router.get("/signup", (req, res) => {
@@ -32,6 +38,7 @@ router.post("/login", (req, res) => {
       req.session.user = response.user; // response.user is result form db
       res.redirect("/");
     } else {
+      req.session.loginErr = true;
       res.redirect("/login");
     }
   });

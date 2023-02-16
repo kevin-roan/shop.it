@@ -10,6 +10,11 @@
       </div>
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
         <form action="/login" method="post">
+          {{#if LoginErr}}
+            <div class="alert alert-danger" role="alert">
+              Invalid Username of Password..!
+            </div>
+          {{/if}}
           {{! Name input  }}
           <!-- Email input -->
           <div class="form-outline mb-4">
@@ -69,7 +74,6 @@
     </div>
   </div>
 </section>
-
 <style>
   .divider:after, .divider:before { content: ""; flex: 1; height: 1px;
   background: #eee; }
