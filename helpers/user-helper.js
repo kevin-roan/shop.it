@@ -1,14 +1,14 @@
 var db = require("../config/connection");
-var collection = require("../config/collections");
+const collection = require("../config/collections");
 const bcrypt = require("bcrypt");
 module.exports = {
   doSignup: (userData) => {
     return new Promise(async (resolve, reject) => {
       userData.Password = await bcrypt.hash(userData.Password, 10);
       db.get()
-        .collections(collection.USER_COLLECTION)
+        .collection(collection.USER_COLLECTION)
         .insertOne(userData)
-        .this((data) => {
+        .then((data) => {
           resolve(data.insertedId);
         });
     });
