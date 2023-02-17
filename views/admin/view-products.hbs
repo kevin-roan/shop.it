@@ -25,6 +25,18 @@
                 src="/product-images/{{this._id}}.jpg"
                 alt=""
               /></td>
+            <td><td>
+                <a href="/admin/edit-product/}" class="btn btn-primary">Edit</a>
+              </td>
+              <td>
+                <a
+                  href="/admin/delete-product/{{this._id}}"
+                  class="btn btn-danger"
+                >Delete</a>
+              </td>
+
+            </td>
+
           </tr>
         {{/each}}
       </tbody>

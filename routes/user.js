@@ -4,6 +4,13 @@ var productHelpers = require("../helpers/product-helpers");
 const userHelper = require("../helpers/user-helper");
 var userHelpers = require("../helpers/user-helper");
 
+const verifyLogin = (req, res, next) => {
+  if (req.session.loggedIn) {
+    next();
+  } else {
+    res.redirect("login");
+  }
+};
 /* GET home page. */
 router.get("/", function (req, res, next) {
   let user = req.session.user;
@@ -47,4 +54,9 @@ router.get("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/login");
 });
+
+router.get("/cart", verifyLogin, (req, res) => {
+  res.render("user/cart");
+});
+
 module.exports = router;
