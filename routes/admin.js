@@ -42,7 +42,7 @@ router.get("/delete-product/:id", (req, res) => {
 });
 router.get("/edit-product/:id", async (req, res) => {
   let product = await productHelpers.getProductsDetails(req.params.id);
-  console.log(product);
+  console.log({ product });
   res.render("admin/edit-product", { product });
 });
 router.post("/edit-product/:id", (req, res) => {
@@ -50,10 +50,14 @@ router.post("/edit-product/:id", (req, res) => {
   productHelpers.updateProduct(req.params.id, req.body).then(() => {
     res.redirect("/admin");
     // the file will be uploaded to server. even after we redirect to the admin router
-    if (req.files.Image) {
-      let image = req.files.Image;
-      image.mv("./public/product-images/" + id + ".jpg");
-    }
+    let image = req.files.Image;
+    image.mv("./public/product-images/" + id + ".jpg", (err, done) => {
+      if (!err) {
+        res.render("admin/add-product");
+      } else {
+        console.log(err);
+      }
+    });
   });
 });
 module.exports = router;
