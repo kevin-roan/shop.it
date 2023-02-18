@@ -10,6 +10,10 @@ router.get("/", function (req, res, next) {
   });
 });
 
+router.get("/admin-login", (req, res) => {
+  res.render("admin/admin-login");
+});
+
 router.get("/add-product", function (req, res) {
   res.render("admin/add-product");
 });
