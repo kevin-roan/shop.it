@@ -50,7 +50,7 @@ module.exports = {
           {
             $set: {
               Name: proDetails.Name,
-              Catergory: proDetails.Category,
+              Category: proDetails.Category,
               Price: proDetails.Price,
               Description: proDetails.Description,
             },
