@@ -11,7 +11,7 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/admin-login", (req, res) => {
-  res.render("admin/admin-login");
+  res.render("admin/admxn-login");
 });
 
 router.get("/add-product", function (req, res) {
@@ -33,12 +33,11 @@ router.post("/add-product", (req, res) => {
     });
   });
 });
-
 router.get("/delete-product/:id", (req, res) => {
   let prodId = req.params.id;
   console.log(prodId);
-  productHelpers.deleteProduct(prodId).then((respone) => {
-    res.redirect("/admin/");
+  productHelpers.deleteProduct(prodId).then((response) => {
+    res.redirect("/admin");
   });
 });
 module.exports = router;
