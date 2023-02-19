@@ -38,10 +38,22 @@
             alt=""
             style="width:100px;height:auto;"
           />
-          <input type="file" name="Image" class="form-control" />
+          <input
+            type="file"
+            name="Image"
+            class="form-control"
+            id="imgView"
+            onchange="viewImage(event)"
+          />
           <button type="submit" class="btn btn-success mt-4">Submit</button>
         </form>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  function viewImage(event) { console.log("onchange function working")
+  document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+  }
+</script>
