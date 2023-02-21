@@ -3,6 +3,7 @@
 <div class="table mt-5">
 <table class="table mt-5">
     <thead>
+    {{#each products}}
    <tr>
    <th scope="col">Item</th>
    <th scope="col">Title</th>
@@ -11,15 +12,17 @@
     </thead>
 
     <table>
+    <tbody>
     <tr>
-    <td> <img style="width:70px,height:70px;" src="data.image/jpeg;base64,/">
-    <td>Dell Laptop</td>
+    <td> <img style="width:70px;height:70px;" src="/product-images/{{this._id}}.jpg" alt=""></img></td>
+    <td>{{this.Name}}</td>
     <button class="cart-item-count mr-3">-</button>1<button class="cart-item-count ml-3">+</button>
-    </td>
+    </img>
     <td>
     <a href="" class="btn btn-danger">Remove</a>
     </td>
     </tr>
+    {{/each}}
     </tbody>
     </table>
 </div>
