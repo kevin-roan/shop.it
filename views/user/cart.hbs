@@ -1,32 +1,34 @@
 <section>
-<div class="container">
-<div class="table mt-5">
-<table class="table mt-5">
-    <thead>
-    {{#each products}}
-   <tr>
-   <th scope="col">Item</th>
-   <th scope="col">Title</th>
-   <th scope="col">Quantity</th>
-    </tr>
-    </thead>
-
-    <table>
-    <tbody>
+<div class=container>
+<table class="table">
+  <thead>
+  {{#each products}}
     <tr>
-    <td> <img style="width:70px;height:70px;" src="/product-images/{{this._id}}.jpg" alt=""></img></td>
-    <td>{{this.Name}}</td>
-    <button class="cart-item-count mr-3">-</button>1<button class="cart-item-count ml-3">+</button>
-    </img>
-    <td>
-    <a href="" class="btn btn-danger">Remove</a>
-    </td>
+      <th scope="col">Item</th>
+      <th scope="col">Title</th>
+      <th scope="col">Quantity</th>
     </tr>
+  </thead>
+  <tbody>
+    <tr>
+    {{#each this.product}}
+      <th scope="row">
+    <img style="width:70px;height:70px;" src="/product-images/{{this._id}}.jpg" alt=""></img>
+      </th>
+     <td>
+       {{this.Name}}
     {{/each}}
-    </tbody>
-    </table>
+      </td>
+      <td>
+    <button class="btn cart-item-count mr-3">-</button >{{this.quantity}}<button class="btn cart-item-count ml-3">+</button>
+      </td>
+      <td>
+      <button class="btn btn-danger">Remove</button>
+      </td>
+    </tr>
+  </tbody>
+  {{/each}}
+</table>
 </div>
 </section>
-
-
 
