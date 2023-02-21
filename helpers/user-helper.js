@@ -51,9 +51,11 @@ module.exports = {
         .get()
         .collection(collection.CART_COLLECTION)
         .findOne({ user: objectId(userId) });
+      // above commande retieves the object id of 'user' key from db
       if (userCart) {
         let proExist = userCart.products.findIndex(
           (product) => product.item == prodId
+          //above arrow function checks whether the item on the cart with userid, matches with the product id from button click
         );
         console.log(proExist);
         if (proExist != -1) {
