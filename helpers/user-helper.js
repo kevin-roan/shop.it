@@ -63,13 +63,13 @@ module.exports = {
           db.get()
             .collection(collection.CART_COLLECTION)
             .updateOne(
-              { "products.item": objectId(prodId) },
+              { user: objectId(userId), "products.item": objectId(prodId) },
               {
                 $inc: { "products.$.quantity": 1 },
               }
             )
-            .then(() => {
-              resolve();
+            .then((status) => {
+              resolve(status);
             });
         } else {
           db.get()
@@ -125,6 +125,13 @@ module.exports = {
               as: "product",
             },
           },
+          {
+            $project: {
+              item: 1,
+              quantity: 1,
+              product: { $arrayElemAt: ["$product", 0] },
+            },
+          },
           // {
           //   $lookup: {
           //     from: collection.PRODUCT_COLLECTION,
@@ -159,6 +166,25 @@ module.exports = {
         count = cart.products.length;
       }
       resolve(count);
+    });
+  },
+  changeProductQuantity: (details) => {
+    details.count = parseInt(details.count);
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.CART_COLLECTION)
+        .updateOne(
+          {
+            _id: objectId(details.cart),
+            "products.item": objectId(details.product),
+          },
+          {
+            $inc: { "products.$.quantity": details.count },
+          }
+        )
+        .then(() => {
+          resolve();
+        });
     });
   },
 };

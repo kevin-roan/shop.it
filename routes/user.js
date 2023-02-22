@@ -82,4 +82,9 @@ router.get("/add-to-cart/:id", verifyLogin, (req, res) => {
     // res.redirect("/");
   });
 });
+
+router.post("/change-product-quantity", (req, res, next) => {
+  userHelpers.changeProductQuantity(req.body).then((response) => {});
+});
+
 module.exports = router;
