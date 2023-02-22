@@ -202,4 +202,21 @@ module.exports = {
       }
     });
   },
+
+  removeProduct: (details) => {
+    console.log(details.product);
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.CART_COLLECTION)
+        .updateOne(
+          { _id: objectId(details.cart) },
+          {
+            $pull: { product: { item: objectId(details.product) } },
+          }
+        )
+        .then((response) => {
+          resolve({ removeProduct: true });
+        });
+    });
+  },
 };
