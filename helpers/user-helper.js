@@ -132,7 +132,7 @@ module.exports = {
               product: { $arrayElemAt: ["$product", 0] },
             },
           },
-               ])
+        ])
         .toArray();
       //note: we can we iteration here to access cartItems from db, but it will be slow.
       console.log(cartItems);
@@ -204,9 +204,9 @@ module.exports = {
         });
     });
   },
-  getTotalAmount:(userId)=>{
+  getTotalAmount: (userId) => {
     return new Promise(async (resolve, reject) => {
-      let cartItems = await db
+      let total = await db
         .get()
         .collection(collection.CART_COLLECTION)
         .aggregate([
@@ -237,11 +237,20 @@ module.exports = {
               product: { $arrayElemAt: ["$product", 0] },
             },
           },
-               ])
+          {
+            $group: {
+              _id: null,
+              total: {
+                $sum: { $multiply: ["$products.quantity", "$product.Price"] },
+              },
+            },
+          },
+        ])
         .toArray();
       //note: we can we iteration here to access cartItems from db, but it will be slow.
-      console.log(cartItems);
-      resolve(cartItems);
+      console.log(total.quantity);
+      console.log(total);
+      resolve(total);
     });
-  }
+  },
 };
