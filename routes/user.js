@@ -70,7 +70,6 @@ router.get("/logout", (req, res) => {
 
 router.get("/cart", verifyLogin, async (req, res) => {
   let products = await userHelpers.getCartProducts(req.session.user._id);
-  console.log(products);
   let totalamount = await userHelpers.getTotalAmount(req.session.user._id);
   res.render("user/cart", { products, user: req.session.user, totalamount });
 });
@@ -84,8 +83,9 @@ router.get("/add-to-cart/:id", verifyLogin, (req, res) => {
   });
 });
 
-router.post("/change-product-quantity", (req, res, next) => {
-  userHelpers.changeProductQuantity(req.body).then((response) => {
+router.post("/change-product-quantity/", (req, res, next) => {
+  userHelpers.changeProductQuantity(req.body).then(async (response) => {
+    response.total = await userHelpers.getTotalAmount(req.body.user);
     res.json(response);
   });
 });
