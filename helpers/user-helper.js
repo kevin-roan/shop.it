@@ -248,7 +248,6 @@ module.exports = {
         ])
         .toArray();
       //note: we can we iteration here to access cartItems from db, but it will be slow.
-      console.log(total.quantity);
       console.log(total);
       resolve(total);
     });
