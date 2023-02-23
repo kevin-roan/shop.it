@@ -20,9 +20,9 @@
         </td>
       <td>{{this.product.Price}}</td>
       <td>
-    <button id="minus-btn" class="btn cart-item-count mr-3"  onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{user._id}}',-1)">-</button >
+    <button id="minus-btn" class="btn cart-item-count mr-3"  onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)">-</button >
     <span id="{{this.product._id}}">{{this.quantity}}</span>
-    <button class="btn cart-item-count ml-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{user._id}}',1)">+</button>
+    <button class="btn cart-item-count ml-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">+</button>
     </a>
     </td>
       <td>

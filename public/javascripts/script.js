@@ -14,16 +14,15 @@ function addToCart(proId) {
     },
   });
 }
-function changeQuantity(cartId, proId, count) {
-  // function changeQuantity(cartId,proId,count){
+function changeQuantity(cartId, proId, userId, count) {
   let quantity = parseInt(document.getElementById(proId).innerHTML);
-  console.log(quantity);
+  console.log(userId);
   count = parseInt(count);
 
   $.ajax({
     url: "/change-product-quantity",
     data: {
-      user: userId,
+      userf: userId,
       cart: cartId,
       product: proId,
       count: count,
@@ -36,7 +35,7 @@ function changeQuantity(cartId, proId, count) {
         location.reload();
       } else {
         document.getElementById(proId).innerHTML = quantity + count;
-        document.getElementById(total).innerHTML = response.total;
+        document.getElementById("total").innerHTML = response.total;
       }
     },
   });
