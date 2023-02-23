@@ -70,7 +70,6 @@ router.get("/logout", (req, res) => {
 
 router.get("/cart", verifyLogin, async (req, res) => {
   let products = await userHelpers.getCartProducts(req.session.user._id);
-  console.log(products)
   let totalamount = await userHelpers.getTotalAmount(req.session.user._id);
   res.render("user/cart", { products, user: req.session.user, totalamount });
 });
