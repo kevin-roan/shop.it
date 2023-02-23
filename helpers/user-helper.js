@@ -241,15 +241,19 @@ module.exports = {
             $group: {
               _id: null,
               total: {
-                $sum: { $multiply: ["$products.quantity", "$product.Price"] },
+                $sum: {
+                  $multiply: [
+                    { $toInt: "$quantity" },
+                    { $toInt: "$product.Price" },
+                  ],
+                },
               },
             },
           },
         ])
         .toArray();
       //note: we can we iteration here to access cartItems from db, but it will be slow.
-      console.log(total);
-      resolve(total);
+      resolve(total[0].total);
     });
   },
 };
