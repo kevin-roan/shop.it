@@ -23,6 +23,7 @@ function changeQuantity(cartId, proId, count) {
   $.ajax({
     url: "/change-product-quantity",
     data: {
+      user: userId,
       cart: cartId,
       product: proId,
       count: count,
@@ -35,6 +36,7 @@ function changeQuantity(cartId, proId, count) {
         location.reload();
       } else {
         document.getElementById(proId).innerHTML = quantity + count;
+        document.getElementById(total).innerHTML = response.total;
       }
     },
   });
