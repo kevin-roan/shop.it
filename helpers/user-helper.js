@@ -181,7 +181,7 @@ module.exports = {
             }
           )
           .then((response) => {
-            resolve(true);
+            resolve({ status: true });
           });
       }
     });
@@ -252,8 +252,11 @@ module.exports = {
           },
         ])
         .toArray();
-      //note: we can we iteration here to access cartItems from db, but it will be slow.
-      resolve(total[0].total);
+      if (total[0]) {
+        resolve(total[0].total);
+      } else {
+        resolve([]);
+      }
     });
   },
 };
