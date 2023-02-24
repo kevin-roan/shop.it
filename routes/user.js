@@ -47,7 +47,7 @@ router.post("/signup", (req, res) => {
     console.log(response);
     req.session.loggedIn = true;
     req.session.user = response.user;
-    res.redirect("/");
+    res.redirect("/")
   });
 });
 
@@ -106,8 +106,13 @@ router.get("/place-order", verifyLogin, async (req, res) => {
   res.render("user/place-order", { total, user: req.session.user });
 });
 
-router.post("/place-order", (req, res) => {
-  console.log("Placed order")
+router.post("/place-order", async(req, res) => {
+  let products=await userHelpers.getCartProductsList(req.body.userId)
+    let totalPrice=await userHelpers.getTotalAmount(req.body.userId)
+  userHelpers.placeOrder(req.body,products,totalPrice).then((response) => { 
+    res.json({status:true})
+  });
+  console.log("Placed order");
   console.log(req.body);
 });
 module.exports = router;

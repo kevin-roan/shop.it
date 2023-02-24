@@ -259,4 +259,33 @@ module.exports = {
       }
     });
   },
+  placeOrder:(order,products,total)=>{
+     return new Promise((resolve,reject)=>{
+        console.log(order,products,total)
+        let status=order['payment-method']=='cod'?'placed':'pending'
+        let orderObj={
+            deliveryDetails:{
+                mobile:order.mobile,
+                address:order.address,
+                pincode:order.pincode
+        },
+        userId:objectId(order.userId),
+        paymentMethod:order['payment-method'],
+        products:products,
+        totalAmount:total,
+        status:status
+      }
+      db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response)=>{
+        db.get().collection(collection.CART_COLLECTION).deleteOne({user:objectId(order.userId)})
+        resolve()
+      })
+    }) 
+  },
+  
+  getCartProductsList:(userId)=>{
+    return new Promise(async(resolve,reject)=>{
+      let cart=await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(userId)})
+      resolve(cart.products)
+    })
+  },
 };
