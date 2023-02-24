@@ -106,4 +106,8 @@ router.get("/place-order", verifyLogin, async (req, res) => {
   res.render("user/place-order", { total, user: req.session.user });
 });
 
+router.post("/place-order", (req, res) => {
+  console.log("Placed order")
+  console.log(req.body);
+});
 module.exports = router;
